@@ -1,0 +1,38 @@
+// Declarations
+int ir;
+int pin13 = 13;
+int pin3 = 3;
+
+// Setup method
+void setup() {
+
+  // Begin with baudrate of 9600
+  Serial.begin(9600);
+
+  // Pin 13 will output voltage
+  pinMode(pin13, OUTPUT);
+
+  // Pin 3 will input data
+  pinMode(pin3, INPUT);
+}
+
+void loop() {
+  // Pin 13 will give 5 volts
+  digitalWrite(13, HIGH);
+  
+  int pulseX;
+  int acc; 
+  
+  // Reading accelerometer data
+  pulseX = pulseIn(pin3, LOW);
+  acc = ((pulseX / 10) - 400) * 8; 
+  
+  // Read input from pin 0
+  ir = analogRead(0); 
+  
+  // Print to serial port
+  Serial.print(pulseX); 
+  Serial.print("  ");
+  Serial.println(ir);
+  delay(600);
+}
